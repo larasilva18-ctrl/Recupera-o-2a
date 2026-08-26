@@ -14,23 +14,27 @@ html {
 
 body {
     min-height: 100vh;
-
     font-family: "Inter", sans-serif;
+
+    color: #ffffff;
 
     background:
         radial-gradient(
             circle at 10% 10%,
-            rgba(220, 38, 38, 0.12),
-            transparent 30%
+            rgba(0, 229, 255, 0.16),
+            transparent 28%
         ),
         radial-gradient(
-            circle at 90% 40%,
-            rgba(127, 29, 29, 0.12),
+            circle at 90% 15%,
+            rgba(168, 85, 247, 0.18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(236, 72, 153, 0.12),
             transparent 30%
         ),
-        #070404;
-
-    color: #fff7f7;
+        #060711;
 
     overflow-x: hidden;
 }
@@ -42,32 +46,49 @@ body {
 
 :root {
 
-    --background: #070404;
+    --background: #060711;
 
-    --surface: #120909;
+    --surface: #0d1020;
 
-    --surface-light: #1d0c0c;
+    --surface-light: #151a32;
 
-    --primary: #dc2626;
+    --primary: #7c3aed;
 
-    --primary-light: #f87171;
+    --blue: #3b82f6;
 
-    --primary-dark: #7f1d1d;
+    --cyan: #06b6d4;
 
-    --red-glow: #ef4444;
+    --pink: #ec4899;
 
-    --text: #fff7f7;
+    --purple: #8b5cf6;
 
-    --text-secondary: #a99c9c;
+    --green: #22c55e;
 
-    --border: rgba(239, 68, 68, 0.16);
+    --yellow: #facc15;
+
+    --orange: #f97316;
+
+    --text: #ffffff;
+
+    --text-secondary: #aeb5cc;
+
+    --border: rgba(255, 255, 255, 0.10);
 
     --gradient:
         linear-gradient(
             135deg,
-            #7f1d1d,
-            #dc2626,
-            #ef4444
+            #3b82f6,
+            #8b5cf6,
+            #ec4899
+        );
+
+    --gradient-bright:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #3b82f6,
+            #8b5cf6,
+            #ec4899
         );
 }
 
@@ -87,26 +108,25 @@ button {
 
 .container {
     width: min(1180px, calc(100% - 48px));
-
     margin: 0 auto;
 }
 
 
 /* =====================================================
-   BRILHOS DO FUNDO
+   BRILHOS COLORIDOS
 ===================================================== */
 
 .background-glow {
     position: fixed;
 
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
 
     border-radius: 50%;
 
-    filter: blur(110px);
+    filter: blur(120px);
 
-    opacity: 0.11;
+    opacity: 0.13;
 
     pointer-events: none;
 
@@ -114,24 +134,21 @@ button {
 }
 
 .glow-one {
-    top: 100px;
-    left: -220px;
-
-    background: #ef4444;
+    top: -150px;
+    left: -180px;
+    background: #06b6d4;
 }
 
 .glow-two {
-    right: -220px;
-    top: 500px;
-
-    background: #7f1d1d;
+    right: -180px;
+    top: 250px;
+    background: #8b5cf6;
 }
 
 .glow-three {
-    left: 40%;
+    left: 35%;
     bottom: -300px;
-
-    background: #b91c1c;
+    background: #ec4899;
 }
 
 
@@ -141,16 +158,13 @@ button {
 
 .header {
     position: sticky;
-
     top: 0;
-
     z-index: 100;
 
     background:
-        rgba(7, 4, 4, 0.78);
+        rgba(6, 7, 17, 0.78);
 
     backdrop-filter: blur(22px);
-
     -webkit-backdrop-filter: blur(22px);
 
     border-bottom:
@@ -161,9 +175,7 @@ button {
     min-height: 82px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 30px;
@@ -174,13 +186,10 @@ button {
 
 .logo {
     display: flex;
-
     align-items: center;
-
     gap: 11px;
 
     font-size: 15px;
-
     font-weight: 800;
 
     letter-spacing: 1.5px;
@@ -191,17 +200,14 @@ button {
     height: 38px;
 
     display: grid;
-
     place-items: center;
 
     border-radius: 11px;
 
-    background: var(--gradient);
-
-    color: white;
+    background: var(--gradient-bright);
 
     box-shadow:
-        0 8px 30px rgba(220, 38, 38, 0.35);
+        0 8px 30px rgba(139, 92, 246, 0.35);
 }
 
 .logo small {
@@ -209,7 +215,7 @@ button {
 
     margin-top: 2px;
 
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 7px;
 
@@ -221,7 +227,6 @@ button {
 
 .navigation {
     display: flex;
-
     align-items: center;
 
     gap: 30px;
@@ -230,7 +235,7 @@ button {
 .navigation a {
     position: relative;
 
-    color: #a99c9c;
+    color: #969db6;
 
     font-size: 13px;
 
@@ -248,7 +253,6 @@ button {
     position: absolute;
 
     left: 50%;
-
     bottom: -12px;
 
     width: 5px;
@@ -258,26 +262,24 @@ button {
 
     transform: translateX(-50%);
 
-    background: #ef4444;
+    background: #06b6d4;
 
     box-shadow:
-        0 0 14px #ef4444;
+        0 0 14px #06b6d4;
 }
 
 
-/* BOTÃO HEADER */
+/* BOTÃO */
 
 .header-button {
     display: flex;
-
     align-items: center;
-
     gap: 10px;
 
     padding: 10px 17px;
 
     border:
-        1px solid var(--border);
+        1px solid rgba(139, 92, 246, 0.25);
 
     border-radius: 50px;
 
@@ -293,10 +295,10 @@ button {
 
 .header-button:hover {
     background:
-        rgba(220, 38, 38, 0.10);
+        rgba(139, 92, 246, 0.12);
 
     border-color:
-        rgba(239, 68, 68, 0.45);
+        rgba(139, 92, 246, 0.5);
 
     transform: translateY(-2px);
 }
@@ -310,11 +312,9 @@ button {
     min-height: 650px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -337,14 +337,14 @@ button {
     margin-bottom: 25px;
 
     border:
-        1px solid rgba(220, 38, 38, 0.30);
+        1px solid rgba(6, 182, 212, 0.35);
 
     border-radius: 50px;
 
     background:
-        rgba(220, 38, 38, 0.08);
+        rgba(6, 182, 212, 0.08);
 
-    color: #fca5a5;
+    color: #67e8f9;
 
     font-size: 10px;
 
@@ -359,10 +359,10 @@ button {
 
     border-radius: 50%;
 
-    background: #ef4444;
+    background: #22d3ee;
 
     box-shadow:
-        0 0 14px #ef4444;
+        0 0 14px #22d3ee;
 }
 
 
@@ -387,13 +387,13 @@ button {
     background:
         linear-gradient(
             90deg,
-            #fca5a5,
-            #ef4444,
-            #991b1b
+            #22d3ee,
+            #818cf8,
+            #f472b6,
+            #facc15
         );
 
     -webkit-background-clip: text;
-
     background-clip: text;
 
     color: transparent;
@@ -412,7 +412,9 @@ button {
 }
 
 
-/* HERO BOTÕES */
+/* =====================================================
+   BOTÕES HERO
+===================================================== */
 
 .hero-actions {
     display: flex;
@@ -427,7 +429,6 @@ button {
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 12px;
@@ -444,17 +445,17 @@ button {
 }
 
 .primary-button {
-    background: var(--gradient);
+    background: var(--gradient-bright);
 
     box-shadow:
-        0 12px 35px rgba(220, 38, 38, 0.25);
+        0 12px 35px rgba(139, 92, 246, 0.28);
 }
 
 .primary-button:hover {
     transform: translateY(-3px);
 
     box-shadow:
-        0 18px 45px rgba(220, 38, 38, 0.40);
+        0 18px 45px rgba(236, 72, 153, 0.35);
 }
 
 .secondary-button {
@@ -462,22 +463,26 @@ button {
         1px solid var(--border);
 
     background:
-        rgba(255,255,255,0.025);
+        rgba(255, 255, 255, 0.025);
 }
 
 .secondary-button:hover {
     background:
-        rgba(220,38,38,0.08);
+        rgba(59, 130, 246, 0.10);
+
+    border-color:
+        rgba(59, 130, 246, 0.4);
 
     transform: translateY(-3px);
 }
 
 
-/* ESTATÍSTICAS */
+/* =====================================================
+   ESTATÍSTICAS
+===================================================== */
 
 .hero-stats {
     display: flex;
-
     align-items: center;
 
     gap: 45px;
@@ -492,7 +497,6 @@ button {
 
 .hero-stats div {
     display: flex;
-
     flex-direction: column;
 
     gap: 4px;
@@ -500,12 +504,10 @@ button {
 
 .hero-stats strong {
     font-size: 20px;
-
-    color: white;
 }
 
 .hero-stats span {
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 9px;
 
@@ -537,7 +539,7 @@ button {
 }
 
 .section-label {
-    color: #f87171;
+    color: #67e8f9;
 
     font-size: 10px;
 
@@ -575,7 +577,6 @@ button {
     width: 100%;
 
     display: flex;
-
     flex-direction: column;
 
     gap: 22px;
@@ -590,13 +591,8 @@ article {
     width: 100%;
 
     display: flex;
-
     flex-direction: row;
 
-    /*
-       REQUISITO DO DESAFIO
-       Cada card ocupa 100%.
-    */
     flex: 0 0 100%;
 
     align-items: center;
@@ -614,14 +610,11 @@ article {
         linear-gradient(
             145deg,
             rgba(255,255,255,0.055),
-            rgba(220,38,38,0.018)
+            rgba(99,102,241,0.025)
         );
 
-    /*
-       SOMBRA NORMAL
-    */
     box-shadow:
-        0 15px 45px rgba(255,255,255,0.035);
+        0 15px 45px rgba(0,0,0,0.25);
 
     transition:
         transform 0.35s ease,
@@ -632,42 +625,38 @@ article {
 }
 
 
-/*
-=======================================================
-DESAFIO PRINCIPAL — HOVER
-=======================================================
-
-1. transform: scale(1.02)
-2. sombra mais intensa
-3. sombra avermelhada
-4. profundidade no modo escuro
-*/
+/* =====================================================
+   HOVER — DESAFIO
+===================================================== */
 
 article:hover {
 
     /*
-       EXATAMENTE COMO SOLICITADO
+       OBRIGATÓRIO
     */
     transform: scale(1.02);
 
     border-color:
-        rgba(239,68,68,0.45);
+        rgba(139, 92, 246, 0.55);
 
+    /*
+       SOMBRA COLORIDA
+    */
     box-shadow:
-        0 22px 55px rgba(239,68,68,0.16),
-        0 0 35px rgba(239,68,68,0.08);
+        0 22px 55px rgba(59,130,246,0.18),
+        0 0 35px rgba(236,72,153,0.12),
+        0 0 70px rgba(139,92,246,0.08);
 }
 
 
 /* =====================================================
-   IMAGEM DOS POSTS
+   IMAGEM
 ===================================================== */
 
 .image-wrapper {
     position: relative;
 
     width: 355px;
-
     height: 235px;
 
     flex-shrink: 0;
@@ -677,8 +666,7 @@ article:hover {
     border-radius: 15px;
 
     /*
-       REQUISITO:
-       align-self usado em elemento interno.
+       ALIGN-SELF
     */
     align-self: flex-start;
 }
@@ -707,7 +695,6 @@ article:hover .image-wrapper img {
     left: 13px;
 
     display: grid;
-
     place-items: center;
 
     width: 35px;
@@ -716,12 +703,12 @@ article:hover .image-wrapper img {
     border-radius: 9px;
 
     background:
-        rgba(7,4,4,0.75);
+        rgba(6,7,17,0.75);
 
     backdrop-filter: blur(10px);
 
     border:
-        1px solid rgba(255,255,255,0.12);
+        1px solid rgba(255,255,255,0.15);
 
     color: white;
 
@@ -745,7 +732,6 @@ article:hover .image-wrapper img {
 
 .card-top {
     display: flex;
-
     align-items: center;
 
     gap: 14px;
@@ -759,9 +745,13 @@ article:hover .image-wrapper img {
     border-radius: 6px;
 
     background:
-        rgba(220,38,38,0.12);
+        linear-gradient(
+            90deg,
+            rgba(59,130,246,0.15),
+            rgba(236,72,153,0.15)
+        );
 
-    color: #fca5a5;
+    color: #c4b5fd;
 
     font-size: 10px;
 
@@ -773,7 +763,7 @@ article:hover .image-wrapper img {
 }
 
 .read-time {
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 10px;
 }
@@ -805,7 +795,7 @@ article:hover .image-wrapper img {
 
 
 /* =====================================================
-   CARD FOOTER
+   FOOTER DO CARD
 ===================================================== */
 
 .card-footer {
@@ -822,7 +812,6 @@ article:hover .image-wrapper img {
 
 .author {
     display: flex;
-
     align-items: center;
 
     gap: 10px;
@@ -833,12 +822,12 @@ article:hover .image-wrapper img {
     height: 34px;
 
     display: grid;
-
     place-items: center;
 
     border-radius: 50%;
 
-    background: var(--gradient);
+    background:
+        var(--gradient-bright);
 
     font-size: 12px;
 
@@ -857,13 +846,13 @@ article:hover .image-wrapper img {
 .author small {
     margin-top: 2px;
 
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 9px;
 }
 
 
-/* BOTÃO ARTIGO */
+/* BOTÃO */
 
 .read-more {
     display: flex;
@@ -894,17 +883,21 @@ article:hover .image-wrapper img {
 }
 
 .read-more span {
-    color: #f87171;
+    color: #67e8f9;
 
     transition: 0.3s;
 }
 
 .read-more:hover {
     background:
-        rgba(220,38,38,0.14);
+        linear-gradient(
+            90deg,
+            rgba(59,130,246,0.15),
+            rgba(236,72,153,0.15)
+        );
 
     border-color:
-        rgba(239,68,68,0.45);
+        rgba(139,92,246,0.5);
 }
 
 .read-more:hover span {
@@ -913,7 +906,7 @@ article:hover .image-wrapper img {
 
 
 /* =====================================================
-   ÁREA DE JOGOS
+   JOGOS
 ===================================================== */
 
 .games-grid {
@@ -924,9 +917,6 @@ article:hover .image-wrapper img {
 
     gap: 22px;
 }
-
-
-/* GAME CARD */
 
 .game-card {
     position: relative;
@@ -941,12 +931,12 @@ article:hover .image-wrapper img {
     background:
         linear-gradient(
             145deg,
-            #160909,
-            #0e0606
+            #0f1224,
+            #080914
         );
 
     box-shadow:
-        0 18px 45px rgba(255,255,255,0.025);
+        0 18px 45px rgba(0,0,0,0.25);
 
     transition:
         transform 0.35s ease,
@@ -955,18 +945,18 @@ article:hover .image-wrapper img {
 }
 
 .game-card:hover {
-    transform:
-        translateY(-8px);
+    transform: translateY(-8px);
 
     border-color:
-        rgba(239,68,68,0.38);
+        rgba(139,92,246,0.45);
 
     box-shadow:
-        0 25px 60px rgba(239,68,68,0.12);
+        0 25px 60px rgba(139,92,246,0.16),
+        0 0 40px rgba(6,182,212,0.08);
 }
 
 
-/* IMAGEM DO JOGO */
+/* IMAGEM */
 
 .game-image {
     position: relative;
@@ -991,7 +981,7 @@ article:hover .image-wrapper img {
 }
 
 
-/* SOBREPOSIÇÃO */
+/* OVERLAY */
 
 .game-overlay {
     position: absolute;
@@ -1002,12 +992,12 @@ article:hover .image-wrapper img {
     padding: 7px 12px;
 
     border:
-        1px solid rgba(255,255,255,0.14);
+        1px solid rgba(255,255,255,0.16);
 
     border-radius: 7px;
 
     background:
-        rgba(7,4,4,0.72);
+        rgba(6,7,17,0.72);
 
     backdrop-filter: blur(12px);
 
@@ -1021,14 +1011,14 @@ article:hover .image-wrapper img {
 }
 
 
-/* CONTEÚDO DO JOGO */
+/* CONTEÚDO */
 
 .game-content {
     padding: 25px;
 }
 
 .game-tag {
-    color: #f87171;
+    color: #67e8f9;
 
     font-size: 9px;
 
@@ -1058,7 +1048,7 @@ article:hover .image-wrapper img {
 }
 
 
-/* BOTÃO DO JOGO */
+/* BOTÃO */
 
 .game-button {
     width: 100%;
@@ -1077,7 +1067,8 @@ article:hover .image-wrapper img {
 
     border-radius: 10px;
 
-    background: var(--gradient);
+    background:
+        var(--gradient-bright);
 
     color: white;
 
@@ -1088,7 +1079,7 @@ article:hover .image-wrapper img {
     cursor: pointer;
 
     box-shadow:
-        0 10px 25px rgba(220,38,38,0.20);
+        0 10px 25px rgba(139,92,246,0.20);
 
     transition: 0.3s;
 }
@@ -1097,12 +1088,12 @@ article:hover .image-wrapper img {
     transform: translateY(-2px);
 
     box-shadow:
-        0 15px 35px rgba(220,38,38,0.35);
+        0 15px 35px rgba(236,72,153,0.30);
 }
 
 
 /* =====================================================
-   PAINÉIS DOS JOGOS
+   PAINEL DE JOGOS
 ===================================================== */
 
 .game-panel {
@@ -1113,15 +1104,15 @@ article:hover .image-wrapper img {
     padding: 30px;
 
     border:
-        1px solid rgba(239,68,68,0.25);
+        1px solid rgba(139,92,246,0.30);
 
     border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(220,38,38,0.08),
-            rgba(255,255,255,0.025)
+            rgba(59,130,246,0.08),
+            rgba(236,72,153,0.06)
         );
 
     box-shadow:
@@ -1146,18 +1137,14 @@ article:hover .image-wrapper img {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
-
-
-/* CABEÇALHO DO PAINEL */
 
 .panel-header {
     display: flex;
 
     justify-content: space-between;
 
-    color: #f87171;
+    color: #67e8f9;
 
     font-size: 10px;
 
@@ -1169,9 +1156,6 @@ article:hover .image-wrapper img {
 .panel-header strong {
     color: white;
 }
-
-
-/* PERGUNTA */
 
 .game-panel h3 {
     max-width: 700px;
@@ -1223,10 +1207,14 @@ article:hover .image-wrapper img {
 
 .answers button:hover {
     background:
-        rgba(220,38,38,0.15);
+        linear-gradient(
+            90deg,
+            rgba(59,130,246,0.15),
+            rgba(236,72,153,0.15)
+        );
 
     border-color:
-        rgba(239,68,68,0.45);
+        rgba(139,92,246,0.5);
 
     transform: translateY(-2px);
 }
@@ -1248,27 +1236,8 @@ article:hover .image-wrapper img {
 }
 
 
-/* PONTUAÇÃO */
-
-.quiz-score {
-    margin-top: 25px;
-
-    text-align: center;
-
-    color: #8f7e7e;
-
-    font-size: 12px;
-}
-
-.quiz-score strong {
-    color: #f87171;
-
-    font-size: 18px;
-}
-
-
 /* =====================================================
-   JOGO DE CLIQUE
+   CLIQUE
 ===================================================== */
 
 .click-score {
@@ -1282,7 +1251,7 @@ article:hover .image-wrapper img {
 }
 
 .click-score span {
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 10px;
 
@@ -1294,11 +1263,14 @@ article:hover .image-wrapper img {
 
     font-size: 55px;
 
-    color: white;
+    background:
+        var(--gradient-bright);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
 }
-
-
-/* BOTÃO GIGANTE */
 
 .click-target {
     width: 180px;
@@ -1314,10 +1286,13 @@ article:hover .image-wrapper img {
     border-radius: 50%;
 
     background:
-        radial-gradient(
-            circle,
-            #ef4444,
-            #991b1b 70%
+        conic-gradient(
+            #06b6d4,
+            #3b82f6,
+            #8b5cf6,
+            #ec4899,
+            #f97316,
+            #06b6d4
         );
 
     color: white;
@@ -1329,7 +1304,7 @@ article:hover .image-wrapper img {
     cursor: pointer;
 
     box-shadow:
-        0 0 50px rgba(220,38,38,0.30);
+        0 0 50px rgba(139,92,246,0.30);
 
     transition: 0.15s;
 }
@@ -1338,34 +1313,11 @@ article:hover .image-wrapper img {
     transform: scale(1.05);
 
     box-shadow:
-        0 0 70px rgba(239,68,68,0.50);
+        0 0 70px rgba(236,72,153,0.45);
 }
 
 .click-target:active {
     transform: scale(0.93);
-}
-
-
-/* RESET */
-
-.reset-button {
-    display: block;
-
-    margin: 25px auto 0;
-
-    padding: 10px 18px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,0.035);
-
-    color: #aaa;
-
-    cursor: pointer;
 }
 
 
@@ -1394,8 +1346,9 @@ article:hover .image-wrapper img {
     background:
         linear-gradient(
             120deg,
-            rgba(127,29,29,0.16),
-            rgba(220,38,38,0.04)
+            rgba(59,130,246,0.10),
+            rgba(139,92,246,0.08),
+            rgba(236,72,153,0.08)
         );
 }
 
@@ -1404,17 +1357,17 @@ article:hover .image-wrapper img {
     height: 60px;
 
     display: grid;
-
     place-items: center;
 
     flex-shrink: 0;
 
     border-radius: 17px;
 
-    background: var(--gradient);
+    background:
+        var(--gradient-bright);
 
     box-shadow:
-        0 10px 30px rgba(220,38,38,0.25);
+        0 10px 30px rgba(139,92,246,0.25);
 }
 
 .about-card h2 {
@@ -1446,7 +1399,7 @@ footer {
     border-top:
         1px solid var(--border);
 
-    background: #050202;
+    background: #04050c;
 }
 
 .footer-content {
@@ -1460,7 +1413,7 @@ footer {
 
     gap: 20px;
 
-    color: #806f6f;
+    color: #777f9c;
 
     font-size: 10px;
 }
@@ -1473,68 +1426,6 @@ footer {
     gap: 10px;
 
     color: white;
-}
-
-.footer-logo .logo-symbol {
-    width: 30px;
-    height: 30px;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast {
-    position: fixed;
-
-    right: 25px;
-    bottom: 25px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 13px 18px;
-
-    border:
-        1px solid rgba(239,68,68,0.25);
-
-    border-radius: 10px;
-
-    background:
-        rgba(18,9,9,0.94);
-
-    backdrop-filter: blur(15px);
-
-    color: white;
-
-    font-size: 11px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.40);
-
-    transform: translateY(120px);
-
-    opacity: 0;
-
-    transition: 0.4s;
-
-    z-index: 999;
-}
-
-.toast.show {
-    transform: translateY(0);
-
-    opacity: 1;
-}
-
-.toast span {
-    color: #4ade80;
 }
 
 
@@ -1581,10 +1472,6 @@ footer {
         min-height: 570px;
     }
 
-    .hero h1 {
-        letter-spacing: -2px;
-    }
-
     .hero-actions {
         flex-direction: column;
 
@@ -1596,20 +1483,11 @@ footer {
         width: 100%;
     }
 
-    .hero-stats {
-        gap: 25px;
-    }
-
     .section-heading {
         flex-direction: column;
 
         align-items: flex-start;
     }
-
-    /*
-       No celular os cards ficam verticais
-       para preservar a usabilidade.
-    */
 
     article {
         flex-direction: column;
@@ -1621,7 +1499,6 @@ footer {
 
     .image-wrapper {
         width: 100%;
-
         height: 240px;
 
         align-self: center;
@@ -1645,10 +1522,6 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .game-panel h3 {
-        font-size: 25px;
-    }
-
     .about-card {
         flex-direction: column;
 
@@ -1667,16 +1540,8 @@ footer {
 
 @media (max-width: 450px) {
 
-    .hero {
-        padding-top: 60px;
-    }
-
     .hero h1 {
         font-size: 45px;
-    }
-
-    .hero-stats {
-        gap: 15px;
     }
 
     .section-heading h2 {
@@ -1703,15 +1568,4 @@ footer {
     .about-card {
         padding: 25px;
     }
-}
-article:hover {
-
-    transform: scale(1.02);
-
-    border-color:
-        rgba(239,68,68,0.45);
-
-    box-shadow:
-        0 22px 55px rgba(239,68,68,0.16),
-        0 0 35px rgba(239,68,68,0.08);
 }
