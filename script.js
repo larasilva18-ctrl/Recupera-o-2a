@@ -1,218 +1,182 @@
 /* =====================================================
-   ELEMENTOS
+   SISTEMA GERAL
 ===================================================== */
 
-const buttons =
-    document.querySelectorAll(".read-more");
+const totalPoints = document.getElementById("statPoints");
 
-const toast =
-    document.getElementById("toast");
-
-const exploreButton =
-    document.getElementById("exploreButton");
+let globalScore = 0;
 
 
 /* =====================================================
-   BOTÕES DOS ARTIGOS
+   ATUALIZAR PONTUAÇÃO
 ===================================================== */
 
-buttons.forEach((button) => {
+function addPoints(points) {
 
-    button.addEventListener("click", () => {
+    globalScore += points;
 
-        const card =
-            button.closest("article");
-
-        const title =
-            card
-                .querySelector("h3")
-                .textContent
-                .trim();
-
-        showToast(
-            `Selecionado: ${title}`
-        );
-
-    });
-
-});
-
-
-/* =====================================================
-   BOTÃO EXPLORAR
-===================================================== */
-
-exploreButton.addEventListener(
-    "click",
-    () => {
-
-        document
-            .getElementById("postagens")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-
+    if (totalPoints) {
+        totalPoints.textContent =
+            String(globalScore).padStart(3, "0");
     }
-);
+}
 
 
 /* =====================================================
-   TOAST
+   BOTÃO PREMIUM
 ===================================================== */
 
-function showToast(message) {
+const themeButton =
+    document.getElementById("themeButton");
 
-    toast.innerHTML = `
-        <span>✓</span>
-        ${message}
-    `;
+if (themeButton) {
 
-    toast.classList.add("show");
+    themeButton.addEventListener(
+        "click",
+        () => {
 
-    setTimeout(() => {
+            document.body.classList.toggle(
+                "premium-mode"
+            );
 
-        toast.classList.remove("show");
-
-    }, 2800);
+        }
+    );
 
 }
 
 
 /* =====================================================
-   ANIMAÇÃO DOS CARDS
+   JOGOS
 ===================================================== */
 
-const cards =
-    document.querySelectorAll(".card");
+const gameButtons =
+    document.querySelectorAll(".game-button");
 
-const observer =
-    new IntersectionObserver(
+const quizPanel =
+    document.getElementById("quizPanel");
 
-        (entries) => {
+const clickPanel =
+    document.getElementById("clickPanel");
 
-            entries.forEach((entry) => {
 
-                if (entry.isIntersecting) {
+gameButtons.forEach(button => {
 
-                    entry.target.classList.add(
-                        "visible"
-                    );
+    button.addEventListener(
+        "click",
+        () => {
 
-                    observer.unobserve(
-                        entry.target
-                    );
+            const game =
+                button.dataset.game;
 
-                }
 
-            });
+            if (quizPanel) {
+                quizPanel.classList.remove(
+                    "active"
+                );
+            }
 
-        },
+            if (clickPanel) {
+                clickPanel.classList.remove(
+                    "active"
+                );
+            }
 
-        {
-            threshold: 0.12
+
+            if (game === "quiz") {
+
+                quizPanel.classList.add(
+                    "active"
+                );
+
+                startQuiz();
+
+            }
+
+
+            if (game === "clicks") {
+
+                clickPanel.classList.add(
+                    "active"
+                );
+
+                startClickGame();
+
+            }
+
+
+            const panel =
+                game === "quiz"
+                    ? quizPanel
+                    : clickPanel;
+
+
+            if (panel) {
+
+                setTimeout(() => {
+
+                    panel.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }, 100);
+
+            }
+
         }
-
     );
 
-
-cards.forEach((card, index) => {
-
-    card.style.opacity = "0";
-
-    card.style.transform =
-        "translateY(30px)";
-
-    card.style.transition = `
-        opacity 0.7s ease ${index * 0.12}s,
-        transform 0.7s ease ${index * 0.12}s
-    `;
-
-    observer.observe(card);
-
 });
-
-
-/* =====================================================
-   ESTILO DE ENTRADA
-===================================================== */
-
-const animationStyle =
-    document.createElement("style");
-
-animationStyle.textContent = `
-
-    .card.visible {
-
-        opacity: 1 !important;
-
-        transform:
-            translateY(0) !important;
-
-    }
-
-`;
-
-document.head.appendChild(
-    animationStyle
-);
 
 
 /* =====================================================
    QUIZ
 ===================================================== */
 
-const startQuiz =
-    document.getElementById("startQuiz");
-
-const quizPanel =
-    document.getElementById("quizPanel");
-
-const question =
-    document.getElementById("question");
-
-const answers =
-    document.getElementById("answers");
-
-const quizScore =
-    document.getElementById("quizScore");
-
-const quizProgress =
-    document.getElementById("quizProgress");
-
-
-const quizQuestions = [
+const questions = [
 
     {
         question:
-            "Qual linguagem é utilizada para estruturar páginas web?",
+            "Qual linguagem é utilizada para estruturar uma página web?",
 
-        answers:
-            ["HTML", "CSS", "Python", "SQL"],
+        answers: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Python"
+        ],
 
-        correct:
-            "HTML"
+        correct: 0
     },
 
+
     {
         question:
-            "Qual linguagem é responsável pela estilização das páginas?",
+            "Qual propriedade CSS é usada para criar uma transformação?",
 
-        answers:
-            ["HTML", "CSS", "Java", "PHP"],
+        answers: [
+            "display",
+            "transform",
+            "position",
+            "margin"
+        ],
 
-        correct:
-            "CSS"
+        correct: 1
     },
 
+
     {
         question:
-            "Qual tecnologia adiciona interatividade às páginas?",
+            "Qual seletor é utilizado para aplicar um efeito ao passar o mouse?",
 
-        answers:
-            ["HTML", "CSS", "JavaScript", "SQL"],
+        answers: [
+            ":click",
+            ":mouse",
+            ":hover",
+            ":active"
+        ],
 
-        correct:
-            "JavaScript"
+        correct: 2
     }
 
 ];
@@ -220,76 +184,69 @@ const quizQuestions = [
 
 let currentQuestion = 0;
 
-let score = 0;
+let quizPoints = 0;
 
 
-/* INICIAR QUIZ */
+const questionElement =
+    document.getElementById("question");
 
-startQuiz.addEventListener(
-    "click",
-    () => {
+const answersElement =
+    document.getElementById("answers");
 
-        quizPanel.classList.add(
-            "active"
-        );
-
-        currentQuestion = 0;
-
-        score = 0;
-
-        quizScore.textContent =
-            score;
-
-        loadQuestion();
-
-        quizPanel.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }
-);
+const quizScore =
+    document.getElementById("quizScore");
 
 
-/* CARREGAR PERGUNTA */
+function startQuiz() {
 
-function loadQuestion() {
+    currentQuestion = 0;
 
-    const current =
-        quizQuestions[currentQuestion];
+    quizPoints = 0;
 
-    question.textContent =
-        current.question;
+    quizScore.textContent = "0";
 
-    quizProgress.textContent =
-        `${currentQuestion + 1} / ${quizQuestions.length}`;
+    showQuestion();
 
-    answers.innerHTML = "";
+}
 
 
-    current.answers.forEach(
-        (answer) => {
+function showQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    questionElement.textContent =
+        question.question;
+
+
+    answersElement.innerHTML = "";
+
+
+    question.answers.forEach(
+        (answer, index) => {
 
             const button =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
             button.textContent =
                 answer;
 
-            button.dataset.answer =
-                answer;
 
             button.addEventListener(
                 "click",
-                () => checkAnswer(
-                    button,
-                    answer
-                )
+                () => {
+
+                    checkAnswer(
+                        index,
+                        button
+                    );
+
+                }
             );
 
-            answers.appendChild(
+
+            answersElement.appendChild(
                 button
             );
 
@@ -299,48 +256,40 @@ function loadQuestion() {
 }
 
 
-/* VERIFICAR RESPOSTA */
-
 function checkAnswer(
-    button,
-    answer
+    selected,
+    button
 ) {
 
-    const current =
-        quizQuestions[currentQuestion];
+    const question =
+        questions[currentQuestion];
 
 
-    const allButtons =
-        answers.querySelectorAll(
+    const buttons =
+        answersElement.querySelectorAll(
             "button"
         );
 
-    allButtons.forEach(
-        (item) => {
 
-            item.disabled = true;
-
+    buttons.forEach(
+        btn => {
+            btn.disabled = true;
         }
     );
 
 
     if (
-        answer ===
-        current.correct
+        selected ===
+        question.correct
     ) {
 
         button.classList.add(
             "correct"
         );
 
-        score += 10;
+        quizPoints += 100;
 
-        quizScore.textContent =
-            score;
-
-        showToast(
-            "Resposta correta! +10 pontos"
-        );
+        addPoints(100);
 
     } else {
 
@@ -348,102 +297,65 @@ function checkAnswer(
             "wrong"
         );
 
-        allButtons.forEach(
-            (item) => {
-
-                if (
-                    item.dataset.answer ===
-                    current.correct
-                ) {
-
-                    item.classList.add(
-                        "correct"
-                    );
-
-                }
-
-            }
-        );
-
-        showToast(
-            "Resposta incorreta!"
+        buttons[
+            question.correct
+        ].classList.add(
+            "correct"
         );
 
     }
 
 
-    setTimeout(
-        () => {
+    quizScore.textContent =
+        quizPoints;
 
-            currentQuestion++;
 
-            if (
-                currentQuestion <
-                quizQuestions.length
-            ) {
+    setTimeout(() => {
 
-                loadQuestion();
+        currentQuestion++;
 
-            } else {
 
-                question.textContent =
-                    `Quiz finalizado! Você fez ${score} pontos.`;
+        if (
+            currentQuestion <
+            questions.length
+        ) {
 
-                answers.innerHTML = `
-                    <button
-                        id="restartQuiz"
-                    >
-                        Jogar novamente
-                    </button>
-                `;
+            showQuestion();
 
-                quizProgress.textContent =
-                    "FINAL";
+        } else {
 
-                document
-                    .getElementById(
-                        "restartQuiz"
-                    )
-                    .addEventListener(
-                        "click",
-                        () => {
+            questionElement.textContent =
+                `🏆 Quiz concluído! Você fez ${quizPoints} pontos.`;
 
-                            currentQuestion =
-                                0;
+            answersElement.innerHTML = "";
 
-                            score =
-                                0;
+            const restart =
+                document.createElement(
+                    "button"
+                );
 
-                            quizScore.textContent =
-                                "0";
+            restart.textContent =
+                "Jogar novamente";
 
-                            loadQuestion();
+            restart.addEventListener(
+                "click",
+                startQuiz
+            );
 
-                        }
-                    );
+            answersElement.appendChild(
+                restart
+            );
 
-            }
+        }
 
-        },
-        900
-    );
+    }, 1000);
 
 }
 
 
 /* =====================================================
-   JOGO DE CLIQUES
+   DESAFIO DE CLIQUES
 ===================================================== */
-
-const startClickGame =
-    document.getElementById(
-        "startClickGame"
-    );
-
-const clickPanel =
-    document.getElementById(
-        "clickPanel"
-    );
 
 const clickTarget =
     document.getElementById(
@@ -455,14 +367,9 @@ const clickScore =
         "clickScore"
     );
 
-const timer =
+const timerElement =
     document.getElementById(
         "timer"
-    );
-
-const resetClick =
-    document.getElementById(
-        "resetClick"
     );
 
 
@@ -470,75 +377,84 @@ let clicks = 0;
 
 let timeLeft = 10;
 
-let gameRunning = false;
+let clickGameRunning = false;
 
-let gameTimer;
-
-
-/* INICIAR */
-
-startClickGame.addEventListener(
-    "click",
-    () => {
-
-        clickPanel.classList.add(
-            "active"
-        );
-
-        startClickGame.disabled =
-            true;
-
-        startClickGame.style.opacity =
-            "0.5";
-
-        startClickRound();
-
-        clickPanel.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }
-);
+let clickInterval;
 
 
-/* INICIAR RODADA */
+function startClickGame() {
 
-function startClickRound() {
+    clearInterval(
+        clickInterval
+    );
+
 
     clicks = 0;
 
     timeLeft = 10;
 
-    gameRunning = true;
+    clickGameRunning = false;
+
 
     clickScore.textContent =
-        clicks;
+        "0";
 
-    timer.textContent =
-        timeLeft;
-
-
-    clearInterval(
-        gameTimer
-    );
+    timerElement.textContent =
+        "10";
 
 
-    gameTimer =
+    clickTarget.textContent =
+        "COMEÇAR";
+
+
+    clickTarget.onclick =
+        beginClickGame;
+
+}
+
+
+function beginClickGame() {
+
+    if (clickGameRunning) {
+        return;
+    }
+
+
+    clickGameRunning = true;
+
+    clicks = 0;
+
+    timeLeft = 10;
+
+
+    clickScore.textContent =
+        "0";
+
+    timerElement.textContent =
+        "10";
+
+
+    clickTarget.textContent =
+        "CLIQUE!";
+
+
+    clickTarget.onclick =
+        countClick;
+
+
+    clickInterval =
         setInterval(
             () => {
 
                 timeLeft--;
 
-                timer.textContent =
+                timerElement.textContent =
                     timeLeft;
 
 
-                if (
-                    timeLeft <= 0
-                ) {
+                if (timeLeft <= 0) {
 
-                    endClickGame();
+                    finishClickGame();
 
                 }
 
@@ -549,74 +465,157 @@ function startClickRound() {
 }
 
 
-/* CLIQUE */
+function countClick() {
 
-clickTarget.addEventListener(
-    "click",
-    () => {
+    if (!clickGameRunning) {
+        return;
+    }
 
-        if (!gameRunning) {
-            return;
-        }
 
-        clicks++;
+    clicks++;
 
-        clickScore.textContent =
-            clicks;
+
+    clickScore.textContent =
+        clicks;
+
+
+    /* pontuação */
+
+    addPoints(5);
+
+
+    /* pequena animação */
+
+    clickTarget.style.transform =
+        "scale(0.93)";
+
+
+    setTimeout(() => {
 
         clickTarget.style.transform =
-            "scale(0.93)";
+            "";
 
-        setTimeout(
-            () => {
-
-                clickTarget.style.transform =
-                    "";
-
-            },
-            80
-        );
-
-    }
-);
-
-
-/* FINALIZAR */
-
-function endClickGame() {
-
-    gameRunning = false;
-
-    clearInterval(
-        gameTimer
-    );
-
-    showToast(
-        `Fim! Você fez ${clicks} cliques.`
-    );
-
-    clickTarget.textContent =
-        "FIM!";
-
-    startClickGame.disabled =
-        false;
-
-    startClickGame.style.opacity =
-        "1";
+    }, 80);
 
 }
 
 
-/* REINICIAR */
+function finishClickGame() {
 
-resetClick.addEventListener(
-    "click",
-    () => {
+    clearInterval(
+        clickInterval
+    );
 
-        clickTarget.textContent =
-            "CLIQUE!";
 
-        startClickRound();
+    clickGameRunning = false;
+
+
+    clickTarget.onclick =
+        beginClickGame;
+
+
+    clickTarget.textContent =
+        "JOGAR NOVAMENTE";
+
+
+    timerElement.textContent =
+        "0";
+
+
+    clickScore.textContent =
+        clicks;
+
+}
+
+
+/* =====================================================
+   ANIMAÇÃO DOS CARDS AO ENTRAR NA TELA
+===================================================== */
+
+const cards =
+    document.querySelectorAll(
+        "article, .game-card, .about-card"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+
+cards.forEach(card => {
+
+    card.style.opacity = "0";
+
+    card.style.transform =
+        "translateY(20px)";
+
+    card.style.transition =
+        "opacity .6s ease, transform .6s ease";
+
+    observer.observe(card);
+
+});
+
+
+/* =====================================================
+   CLASSE VISÍVEL
+===================================================== */
+
+const animationStyle =
+    document.createElement("style");
+
+
+animationStyle.textContent = `
+
+    article.visible,
+    .game-card.visible,
+    .about-card.visible {
+
+        opacity: 1 !important;
+
+        transform: translateY(0) !important;
 
     }
+
+    article.visible:hover {
+
+        transform: scale(1.02) !important;
+
+    }
+
+`;
+
+
+document.head.appendChild(
+    animationStyle
+);
+
+
+/* =====================================================
+   ANO AUTOMÁTICO
+===================================================== */
+
+console.log(
+    "Central Premium carregada com sucesso."
 );
